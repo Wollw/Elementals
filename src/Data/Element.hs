@@ -13,6 +13,8 @@ instance Ring Element where
     x <+> y = x + y
     x <*> y = x * y
     (<->) = negate
+    idAdd = Earth
+    idMul = Air
 
 instance Num Element where
     fromInteger = toEnum . fromIntegral . flip mod 4

@@ -13,6 +13,8 @@ instance Ring Planet where
     x <+> y = x + y
     x <*> y = x * y
     (<->) = negate
+    idAdd = Sun
+    idMul = Mercury
 
 instance Num Planet where
     fromInteger = toEnum . fromIntegral . flip mod 7

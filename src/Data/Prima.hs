@@ -13,6 +13,8 @@ instance Ring Prima where
     x <+> y = x + y
     x <*> y = x * y
     (<->) = negate
+    idAdd = Quicksilver
+    idMul = Salt
 
 instance Num Prima where
     fromInteger = toEnum . fromIntegral . flip mod 3
