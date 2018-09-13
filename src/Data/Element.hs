@@ -1,5 +1,5 @@
-module Data.Elemental
-    (Elemental(..))
+module Data.Element
+    (Element(..))
     where
 
 import Data.Ring
@@ -7,14 +7,14 @@ import Data.Ring
 import Data.Monoid
 import Data.Group
 
-data Elemental = Earth | Air | Water | Fire deriving (Show, Enum, Eq)
+data Element = Earth | Air | Water | Fire deriving (Show, Enum, Eq)
 
-instance Ring Elemental where
+instance Ring Element where
     x <+> y = x + y
     x <> y = x * y
     (-) = negate
 
-instance Num Elemental where
+instance Num Element where
     fromInteger = toEnum . fromIntegral . flip mod 4
 -- Monoid over Multiplication
     x * y = toEnum $ flip mod 4 $ getProduct
@@ -30,11 +30,11 @@ instance Num Elemental where
     signum x = Air
 
 -- Abelian Group over Addition.
-instance Monoid Elemental where
+instance Monoid Element where
     mempty = Earth
     mappend = (+)
-instance Group Elemental where
+instance Group Element where
     invert Air = Fire
     invert Fire = Air
     invert x = x 
-instance Abelian Elemental
+instance Abelian Element
