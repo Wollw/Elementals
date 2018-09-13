@@ -11,8 +11,8 @@ data Element = Earth | Air | Water | Fire deriving (Show, Enum, Eq)
 
 instance Ring Element where
     x <+> y = x + y
-    x <> y = x * y
-    (-) = negate
+    x <*> y = x * y
+    (<->) = negate
 
 instance Num Element where
     fromInteger = toEnum . fromIntegral . flip mod 4
@@ -34,7 +34,6 @@ instance Monoid Element where
     mempty = Earth
     mappend = (+)
 instance Group Element where
-    invert Air = Fire
-    invert Fire = Air
-    invert x = x 
+    invert Earth = Earth
+    invert x = toEnum . (+4) . negate . fromEnum $ x
 instance Abelian Element

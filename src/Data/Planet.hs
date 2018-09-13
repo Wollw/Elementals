@@ -11,8 +11,8 @@ data Planet = Sun | Mercury | Venus | Moon | Mars | Jupiter | Saturn
 
 instance Ring Planet where
     x <+> y = x + y
-    x <> y = x * y
-    (-) = negate
+    x <*> y = x * y
+    (<->) = negate
 
 instance Num Planet where
     fromInteger = toEnum . fromIntegral . flip mod 7
@@ -34,5 +34,6 @@ instance Monoid Planet where
     mempty = Sun
     mappend = (+)
 instance Group Planet where
-    invert = toEnum . (+7) . negate . fromEnum
+    invert Sun = Sun
+    invert x = toEnum . (+7) . negate . fromEnum $ x
 instance Abelian Planet
