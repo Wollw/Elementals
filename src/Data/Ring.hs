@@ -15,4 +15,8 @@ ringTableAdd :: (Ring a, Enum a, Monoid a, Num a) => [[a]]
 ringTableAdd = map (\p->map (p +) [mempty ..]) [mempty ..]
 
 ringTableMul :: (Ring a, Enum a, Monoid a, Num a) => [[a]]
-ringTableMul = map (\p->map (p *) [mempty ..]) [mempty ..]
+ringTableMul = map (\p->map (p *) $ enumFrom mempty) $ enumFrom mempty
+
+-- Misc Utils
+ringMult n = map (\x->map (\y->(x*y)`mod`(n+1)) [0..n]) [0..n]
+ringSqrs n = map (\ns->ns!!(ns!!1)) $ ringMult n
